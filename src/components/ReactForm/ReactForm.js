@@ -32,10 +32,15 @@ const ReactForm = () => {
             errors.name = "User name is required"
         }
         if (!values.email) {
-            errors.name = "Email is required"
+            errors.email = "Email is required"
         }
+        // else if (regex.test(values.email)) {
+        //     errors.email = 'please check your email'
+        // }
         if (!values.password) {
-            errors.name = " Password is required"
+            errors.password = " Password is required"
+        } else if (regex.test(values.password.length)) {
+            errors.email = 'please check your password'
         }
 
         return errors
@@ -46,9 +51,7 @@ const ReactForm = () => {
             <div class="hero min-h-screen bg-base-200">
                 <div class="hero-content flex-col lg:flex-row-reverse">
                     <div>
-                        <pre>
-                            {JSON.stringify(formValues)}
-                        </pre>
+
                     </div>
                     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <form onSubmit={handleSubmit}>
@@ -61,6 +64,7 @@ const ReactForm = () => {
                                         value={formValues.name}
                                         onChange={handleChange}
                                         placeholder="Name" class="input input-bordered" />
+                                    <p className='text-red-600'>{formErrors.name}</p>
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
@@ -71,6 +75,7 @@ const ReactForm = () => {
                                         onChange={handleChange}
                                         placeholder="email"
                                         class="input input-bordered" />
+                                    <p className='text-red-600'>{formErrors.email}</p>
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
@@ -80,6 +85,7 @@ const ReactForm = () => {
                                         value={formValues.password}
                                         onChange={handleChange}
                                         placeholder="password" class="input input-bordered" />
+                                    <p className='text-red-600'>{formErrors.password}</p>
                                     <label class="label">
                                         <a href="/" class="label-text-alt link link-hover" >Forgot password?</a>
                                     </label>
